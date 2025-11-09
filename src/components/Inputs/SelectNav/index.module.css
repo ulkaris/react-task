@@ -1,0 +1,7 @@
+.select {
+  min-height: min-content !important;
+  outline: none !important;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
