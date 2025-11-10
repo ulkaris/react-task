@@ -1,85 +1,31 @@
-// import React from 'react';
+import { useState } from "react";
 import styles from "./index.module.css";
 import { SelectFilter } from "../../../Inputs/SelectFilter";
 import searchIcon from "../../../../assets/images/icons/search-normal.svg";
 import { Row, Col, Flex, Select } from "antd";
 import { GoDotFill } from "react-icons/go";
-import image from "../../../../assets/images/admin photo.jpg";
 import deleteIcon from "../../../../assets/images/icons/trash.svg";
 import editIcon from "../../../../assets/images/icons/edit.svg";
 import Pagination from "../../../Pagination";
+import { SelectLimit } from "../../../Inputs/SelectLimit";
+import { usePosts } from "../../../../hooks/usePosts";
 
 const PostTable = () => {
-  const mockPosts = [
-    {
-      id: 1,
-      title:
-        "Milli Aviasiya Akademiyasının təşkilatçılığı ilə həyata keçirilən tədbir",
-      image: image,
-      type: "News",
-      date: "06/11/2026",
-      time: "10:19 AM",
-      status: "Active",
-      publishStatus: "Publish",
-      author: "snovruzlu",
-    },
-    {
-      id: 2,
-      title: "Milli Aviasiya Akademiyasının Akademiyasında keçirilən görüş",
-      image,
-      type: "Announcement",
-      date: "06/11/2026",
-      time: "10:19 AM",
-      status: "Inactive",
-      publishStatus: "Publish",
-      author: "snovruzlu",
-    },
-    {
-      id: 3,
-      title:
-        "Milli Aviasiya Akademiyası tələbələri üçün yeni laboratoriya açıldı",
-      image,
-      type: "News",
-      date: "06/11/2026",
-      time: "10:19 AM",
-      status: "Active",
-      publishStatus: "Publish",
-      author: "snovruzlu",
-    },
-    {
-      id: 4,
-      title: "Milli Aviasiya Akademiyası – gələcəyin pilotları üçün elan",
-      image,
-      type: "Announcement",
-      date: "06/11/2026",
-      time: "10:19 AM",
-      status: "Active",
-      publishStatus: "Publish",
-      author: "snovruzlu",
-    },
-    {
-      id: 5,
-      title: "Milli Aviasiya Akademiyasında yeni tədris ili başladı",
-      image,
-      type: "News",
-      date: "06/11/2026",
-      time: "10:19 AM",
-      status: "Active",
-      publishStatus: "Publish",
-      author: "snovruzlu",
-    },
-    {
-      id: 6,
-      title: "Milli Aviasiya Akademiyası beynəlxalq konfransda təmsil olundu",
-      image,
-      type: "News",
-      date: "06/11/2026",
-      time: "10:19 AM",
-      status: "Active",
-      publishStatus: "Publish",
-      author: "snovruzlu",
-    },
-  ];
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(6);
+
+  const { data, isLoading, isError } = usePosts(page, limit);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error fetching posts.</p>;
+
+  const posts = data?.data || [];
+  const total = data?.total || 0;
+
+  const handleLimit = (value: number) => {
+    setLimit(value);
+    setPage(1);
+  };
 
   return (
     <div>
@@ -154,7 +100,7 @@ const PostTable = () => {
         </Row>
 
         <Row className={styles.body}>
-          {mockPosts.map((post) => (
+          {posts.map((post) => (
             <Col span={24} key={post.id}>
               <Row>
                 <Col span={6} className={styles.table_col}>
@@ -167,10 +113,7 @@ const PostTable = () => {
                         <h4>{post.title}</h4>
                       </div>
                       <div className={styles.text_wrapper}>
-                        <p>
-                          Milli Aviasiya Akademiyasının təşkilatçılığı ilə
-                          həyata keçirilən tədbir
-                        </p>
+                        <p>{post.desc}</p>
                       </div>
                     </div>
                   </Flex>
@@ -246,11 +189,15 @@ const PostTable = () => {
       </div>
       <div className={styles.pagination_wrapper}>
         <Pagination
-          align="center"
-          current={1}
-          total={12}
-          pageSize={1}
-          // onChange={onChange}
+          current={page}
+          total={total}
+          pageSize={limit}
+          onChange={(pageNum) => setPage(pageNum)}
+        />
+        <SelectLimit
+          limit={limit}
+          handleLimit={handleLimit}
+          className={styles.select_limit}
         />
       </div>
     </div>
