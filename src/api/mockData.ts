@@ -131,7 +131,7 @@ export const mockPosts = [
   {
     id: 11,
     title:
-      "Milli Aviasiya Akademiyasının təşkilatçılığı ilə həyata keçirilən tədbir",
+      "Milli Aviasiya Akademiyasının təşkilatçılığı ilə həyata keçirilən search test tədbir",
     image,
     type: "News",
     date: "06/11/2026",
@@ -161,19 +161,20 @@ export const mockPosts = [
     type: "News",
     date: "06/11/2026",
     time: "10:19 AM",
-    status: "Active",
+    status: "Inactive",
     publishStatus: "Publish",
     author: "snovruzlu",
     desc: descriptionText,
   },
   {
     id: 14,
-    title: "Milli Aviasiya Akademiyasının Akademiyasında keçirilən görüş",
+    title:
+      "Milli Aviasiya Akademiyasının Akademiyasında keçirilən görüş, search test",
     image,
     type: "Announcement",
     date: "06/11/2026",
     time: "10:19 AM",
-    status: "Inactive",
+    status: "Active",
     publishStatus: "Publish",
     author: "snovruzlu",
     desc: descriptionText,

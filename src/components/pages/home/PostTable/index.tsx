@@ -13,8 +13,18 @@ import { usePosts } from "../../../../hooks/usePosts";
 const PostTable = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(6);
+  const [typeFilter, setTypeFilter] = useState("all posts");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [searchInput, setSearchInput] = useState("");
+  const [search, setSearch] = useState("");
 
-  const { data, isLoading, isError } = usePosts(page, limit);
+  const { data, isLoading, isError } = usePosts(
+    page,
+    limit,
+    typeFilter,
+    statusFilter,
+    search
+  );
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error fetching posts.</p>;
@@ -27,6 +37,25 @@ const PostTable = () => {
     setPage(1);
   };
 
+  const handleTypeFilter = (value: string) => {
+    setTypeFilter(value);
+    setPage(1);
+  };
+
+  const handleStatusFilter = (value: string) => {
+    setStatusFilter(value);
+    setPage(1);
+  };
+
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+  };
+
+  const applySearch = () => {
+    setSearch(searchInput);
+    setPage(1);
+  };
+
   return (
     <div>
       <div className={styles.table_filter}>
@@ -34,10 +63,9 @@ const PostTable = () => {
           options={[
             { label: "All Posts", value: "all posts" },
             { label: "News", value: "news" },
-            { label: "Announcements", value: "announcements" },
+            { label: "Announcements", value: "announcement" },
           ]}
-          //   onChange={(value) => {
-          //   }}
+          onChange={handleTypeFilter}
           placeholder="All Posts"
           className={styles.select_filter}
         />
@@ -51,7 +79,7 @@ const PostTable = () => {
                   Active
                 </div>
               ),
-              value: "active",
+              value: "Active",
             },
             {
               label: (
@@ -61,17 +89,24 @@ const PostTable = () => {
                   Inactive
                 </div>
               ),
-              value: "inactive",
+              value: "Inactive",
             },
           ]}
-          //   onChange={(value) => {
-          //   }}
+          onChange={handleStatusFilter}
           placeholder="All Status"
           className={styles.select_filter}
         />
         <div className={styles.search_wrapper}>
-          <img src={searchIcon} alt="search" />
-          <input type="search" placeholder="Search" />
+          <img src={searchIcon} alt="search" onClick={applySearch} />
+          <input
+            type="search"
+            placeholder="Search"
+            value={searchInput}
+            onChange={handleSearchInput}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") applySearch();
+            }}
+          />
         </div>
       </div>
       <div className={styles.table}>
