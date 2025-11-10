@@ -6,8 +6,7 @@ const descriptionText =
 export const mockPosts = [
   {
     id: 1,
-    title:
-      "Milli Aviasiya Akademiyasının təşkilatçılığı ilə həyata keçirilən tədbir",
+    title: "tset",
     image,
     type: "News",
     date: "06/11/2026",

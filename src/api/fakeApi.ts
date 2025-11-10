@@ -1,6 +1,6 @@
 import { mockPosts } from "./mockData";
 
-const posts = [...mockPosts];
+let posts = [...mockPosts];
 
 interface GetPostsParams {
   page?: number;
@@ -52,6 +52,14 @@ export const fakeApi = {
 
         resolve({ data: paginatedPosts, total: filteredPosts.length });
       }, 600);
+    });
+  },
+  deletePost: async (id: number) => {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        posts = posts.filter((p) => p.id !== id);
+        resolve();
+      }, 300);
     });
   },
 };

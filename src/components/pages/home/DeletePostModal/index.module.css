@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deleteIcon_wrapper {
+  width: 96px;
+  height: 96px;
+  border-radius: 50px;
+  background-color: #fdeeee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.deleteIcon_wrapper img {
+  width: 40px;
+  height: 40px;
+}
+
+.title {
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 600;
+  color: #2a2a2a;
+  margin-top: 24px;
+}
+
+.desc {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: #4b505a;
+  margin-top: 8px;
+  text-align: center;
+  font-style: italic;
+}
+
+.desc span {
+  font-style: normal;
+  font-weight: 400;
+  color: #6a7282;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.btns button {
+  width: 100%;
+}

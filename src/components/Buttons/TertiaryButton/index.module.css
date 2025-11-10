@@ -1,0 +1,20 @@
+.button {
+  color: #212121 !important;
+  background: none !important;
+  box-shadow: none !important;
+  padding: 12px 28px !important;
+  font-size: 18px !important;
+  line-height: 25px !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  min-height: min-content;
+  border: 1px solid #e5e5e5 !important;
+}
+
+.button:hover {
+  border: 1px solid #e5e5e5 !important;
+}
+
+.button:active {
+  border: 1px solid black !important;
+}

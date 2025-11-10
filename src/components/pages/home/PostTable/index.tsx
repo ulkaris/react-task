@@ -9,6 +9,8 @@ import editIcon from "../../../../assets/images/icons/edit.svg";
 import Pagination from "../../../Pagination";
 import { SelectLimit } from "../../../Inputs/SelectLimit";
 import { usePosts } from "../../../../hooks/usePosts";
+import { useDeletePost } from "../../../../hooks/deletePost";
+import DeleteModal from "../DeletePostModal";
 
 const PostTable = () => {
   const [page, setPage] = useState(1);
@@ -17,6 +19,12 @@ const PostTable = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+  const [selectedPost, setSelectedPost] = useState<any>(null);
+
+  const deleteMutation = useDeletePost();
 
   const { data, isLoading, isError } = usePosts(
     page,
@@ -31,6 +39,24 @@ const PostTable = () => {
 
   const posts = data?.data || [];
   const total = data?.total || 0;
+
+  const handleOpenModal = (post: any) => {
+    setSelectedPost(post);
+    setSelectedPostId(post.id);
+    setIsModalOpen(true);
+  };
+
+  const handleCancelModal = () => {
+    setSelectedPostId(null);
+    setIsModalOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    if (selectedPostId !== null) {
+      deleteMutation.mutate(selectedPostId);
+    }
+    handleCancelModal();
+  };
 
   const handleLimit = (value: number) => {
     setLimit(value);
@@ -213,7 +239,11 @@ const PostTable = () => {
                 </Col>
                 <Col span={2} className={styles.table_col}>
                   <div className={styles.actions}>
-                    <img src={deleteIcon} alt="delete icon" />
+                    <img
+                      src={deleteIcon}
+                      alt="delete icon"
+                      onClick={() => handleOpenModal(post)}
+                    />
                     <img src={editIcon} alt="edit icon" />
                   </div>
                 </Col>
@@ -235,6 +265,12 @@ const PostTable = () => {
           className={styles.select_limit}
         />
       </div>
+      <DeleteModal
+        isModalOpen={isModalOpen}
+        handleCancel={handleCancelModal}
+        handleDelete={handleConfirmDelete}
+        desc={selectedPost?.title}
+      />
     </div>
   );
 };

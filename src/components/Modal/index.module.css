@@ -1,0 +1,32 @@
+.modal {
+  position: relative;
+}
+
+.modal_container {
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.gradient {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 80.04%,
+    #ffffff 100%
+  );
+  pointer-events: none;
+  border-radius: 24px;
+}
+
+@media (max-width: 575px) {
+  .modal_container {
+    max-height: 65vh;
+    gap: 24px;
+    font-size: 14px;
+  }
+}
