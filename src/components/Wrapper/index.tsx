@@ -112,7 +112,7 @@ const DashboardLayoutWrapper: React.FC<DashboardLayoutWrapperProps> = ({
         </div>
       </div>
 
-      <div className={styles.content}>{children ?? <Outlet />}</div>
+      <main className={styles.content}>{children ?? <Outlet />}</main>
     </div>
   );
 };

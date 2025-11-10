@@ -18,6 +18,7 @@ const StyledSelect = styled(Select)`
   .ant-select-arrow {
     top: 32px !important;
     right: 16px !important;
+    color: #787486 !important;
   }
   .ant-select-selection-placeholder {
     color: #787486;
@@ -55,9 +56,6 @@ const StyledSelect = styled(Select)`
   .ant-select-item-option-selected {
     background: none !important;
   }
-  /* .ant-select-focused .ant-select-selector {
-    color: white !important;
-  } */
 `;
 
 export const SelectNav: React.FC<SelectProps> = (props) => (
