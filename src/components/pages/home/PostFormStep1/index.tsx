@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Input } from "antd";
 import { PrimaryButton } from "../../../Buttons/PrimaryButton";
@@ -7,6 +7,10 @@ import { HiOutlineNewspaper } from "react-icons/hi2";
 import { GrAnnounce } from "react-icons/gr";
 import galleryImg from "../../../../assets/images/icons/gallery.svg";
 import { MdCancel } from "react-icons/md";
+
+// react-quilljs imports
+import { useQuill } from "react-quilljs";
+import "quill/dist/quill.snow.css";
 
 interface PostFormStep1Props {
   setProgressValue: (value: number) => void;
@@ -17,6 +21,7 @@ interface FormValues {
   url: string;
   category: string;
   cover_image: File | null;
+  html_content: string;
 }
 
 export const PostFormStep1: React.FC<PostFormStep1Props> = ({
@@ -36,8 +41,24 @@ export const PostFormStep1: React.FC<PostFormStep1Props> = ({
       url: "",
       category: "",
       cover_image: null,
+      html_content: "",
     },
   });
+
+  const { quill, quillRef } = useQuill();
+
+  useEffect(() => {
+    if (!quill) return;
+
+    const handleChange = () => {
+      setValue("html_content", quill.root.innerHTML);
+    };
+
+    quill.on("text-change", handleChange);
+    return () => {
+      quill.off("text-change", handleChange);
+    };
+  }, [quill, setValue]);
 
   const onSubmit = (data: FormValues) => {
     console.log("Form data:", data);
@@ -188,6 +209,36 @@ export const PostFormStep1: React.FC<PostFormStep1Props> = ({
         )}
       </div>
       {/* cover image end */}
+
+      {/*Editor */}
+      <div className={styles.editor_wrapper}>
+        <div className={styles.input_wrapper}>
+          <div>
+            <label>HTML Content</label>
+            <p className={styles.editor_desc}>
+              Use the toolbar to format your text with bold, italic, headers,
+              lists, and more.
+            </p>
+          </div>
+          <Controller
+            name="html_content"
+            control={control}
+            rules={{
+              required: "HTML content is required",
+              validate: (value) =>
+                value.trim() !== "<p><br></p>" || "HTML content is required",
+            }}
+            render={() => (
+              <div>
+                <div ref={quillRef} className={styles.editor} />
+                {errors.html_content && (
+                  <p className={styles.error}>{errors.html_content.message}</p>
+                )}
+              </div>
+            )}
+          />
+        </div>
+      </div>
 
       <PrimaryButton className={styles.button} htmlType="submit">
         Next
