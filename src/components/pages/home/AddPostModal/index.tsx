@@ -4,6 +4,7 @@ import { Modal } from "../../../Modal";
 import flagAze from "../../../../assets/images/AZ flag.svg";
 import flagUK from "../../../../assets/images/UK flag.svg";
 import { PostFormStep1 } from "../PostFormStep1";
+import { PostFormStep2 } from "../PostFormStep2";
 
 interface AddPostModalProps {
   isModalOpen: boolean;
@@ -50,7 +51,7 @@ const AddPostModal: React.FC<AddPostModalProps> = ({
         {progressValue === 50 ? (
           <PostFormStep1 setProgressValue={setProgressValue} />
         ) : (
-          <div>{/* step 2 form */}</div>
+          <PostFormStep2 setProgressValue={setProgressValue} handleCancel={handleCancel}/>
         )}
       </div>
     </Modal>
