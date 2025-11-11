@@ -1,4 +1,4 @@
-import React, { useState, ReactNode, useEffect } from "react";
+import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import styles from "./index.module.css";
 import logo from "../../assets/images/naa_logo_favicon 1.svg";
@@ -9,7 +9,7 @@ import { PiBookOpenTextLight } from "react-icons/pi";
 import { HiOutlineBuildingLibrary } from "react-icons/hi2";
 import adminPhoto from "../../assets/images/admin photo.jpg";
 import { SelectNav } from "../Inputs/SelectNav";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface DashboardLayoutWrapperProps {
   children?: ReactNode;
@@ -33,14 +33,14 @@ const DashboardLayoutWrapper: React.FC<DashboardLayoutWrapperProps> = ({
       links: [
         { name: "Post", href: "/" },
         { name: "Media Library", href: "/" },
-        { name: "System Settings", href: "/about" },
+        { name: "System Settings", href: "/" },
       ],
     },
     {
       title: "Library",
       icon: <PiBookOpenTextLight size={20} />,
       links: [
-        { name: "Books", href: "/about" },
+        { name: "Books", href: "/" },
         { name: "Authors", href: "/" },
       ],
     },
