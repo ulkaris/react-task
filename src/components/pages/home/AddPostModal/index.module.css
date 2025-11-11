@@ -1,0 +1,45 @@
+.languages {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.languages span {
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.modal_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 500;
+  font-family: "Lato";
+  margin-top: 12px;
+}
+
+.proggressBar_wrapper {
+  margin-top: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 8px;
+}
+
+.proggressBar {
+  border-radius: 6px;
+  width: 100%;
+  height: 4px;
+  background-color: #e0e7fa;
+}
+
+.proggressBar_full {
+  background-color: var(--blue_main);
+}
