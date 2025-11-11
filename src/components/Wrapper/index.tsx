@@ -1,4 +1,5 @@
 import React from "react";
+import type { ReactNode } from "react";
 import { Link, Outlet } from "react-router-dom";
 import styles from "./index.module.css";
 import logo from "../../assets/images/naa_logo_favicon 1.svg";

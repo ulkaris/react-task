@@ -3,21 +3,21 @@ import styles from "./index.module.css";
 import { PrimaryButton } from "../../../Buttons/PrimaryButton";
 import { FiPlus } from "react-icons/fi";
 import PostTable from "../PostTable";
-import SuccessModal from "../SuccessModal";
+// import SuccessModal from "../SuccessModal";
 import AddPostModal from "../AddPostModal";
 
 const HomePage = () => {
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  // const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isAddPostModalOpen, setIsAddPostModalOpen] = useState(false);
 
   //open and close functions for success modal
-  const handleOpenSuccessModal = () => {
-    setIsSuccessModalOpen(true);
-  };
+  // const handleOpenSuccessModal = () => {
+  //   setIsSuccessModalOpen(true);
+  // };
 
-  const handleCancelSuccessModal = () => {
-    setIsSuccessModalOpen(false);
-  };
+  // const handleCancelSuccessModal = () => {
+  //   setIsSuccessModalOpen(false);
+  // };
 
   //open and close functions for add post modal
   const handleOpenAddPostModal = () => {
@@ -43,10 +43,10 @@ const HomePage = () => {
         </PrimaryButton>
       </div>
       <PostTable />
-      <SuccessModal
+      {/* <SuccessModal
         isModalOpen={isSuccessModalOpen}
         handleCancel={handleCancelSuccessModal}
-      />
+      /> */}
       <AddPostModal
         isModalOpen={isAddPostModalOpen}
         handleCancel={handleCancelAddPostModal}

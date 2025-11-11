@@ -24,6 +24,7 @@ export const PostFormStep2: React.FC<PostFormStep2Props> = ({
     control,
     handleSubmit,
     setValue,
+    getValues,
     trigger,
     reset,
     formState: { errors },
@@ -41,7 +42,10 @@ export const PostFormStep2: React.FC<PostFormStep2Props> = ({
 
   const handleDeleteImage = (index: number) => {
     setPreviewUrls((prev) => prev.filter((_, i) => i !== index));
-    setValue("gallery_images", (prev) => prev.filter((_, i) => i !== index));
+
+    const currentFiles = getValues("gallery_images") || [];
+    const updatedFiles = currentFiles.filter((_, i) => i !== index);
+    setValue("gallery_images", updatedFiles);
 
     const input = document.getElementById("gallery_input") as HTMLInputElement;
     if (input) input.value = "";
